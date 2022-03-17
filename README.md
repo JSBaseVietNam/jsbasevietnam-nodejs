@@ -114,7 +114,13 @@ npx husky-init && yarn              # Yarn 1
 npx husky add .husky/pre-commit "yarn lint"
 ```
 
+## ECMAScript
+
+- [ES2020](https://www.freecodecamp.org/news/javascript-new-features-es2020/)
+
 # References
 
 - [ESLint](https://khalilstemmler.com/blogs/typescript/eslint-for-typescript/)
 - [Google Style Guide](https://google.github.io/styleguide/jsguide.html)
+- [Ecma International's TC39](https://tc39.es/)
+- [ECMA](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_Resources)
