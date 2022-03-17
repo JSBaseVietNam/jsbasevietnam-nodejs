@@ -100,7 +100,9 @@ dist
 #### Husky
 
 ```bash
-yarn dlx husky-init --yarn2 && yarn
+npx husky-init && yarn              # Yarn 1
+# add hooks
+npx husky add .husky/pre-commit "yarn lint"
 ```
 
 # References
