@@ -25,8 +25,10 @@ interface UserDTO {
   lastName: string;
 }
 
+type ID = number | string;
+
 class User {
-  id!: number;
+  id!: ID;
   firstName!: string;
   lastName?: string;
   movingStrategy!: MovingStrategy;
