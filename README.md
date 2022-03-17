@@ -97,6 +97,15 @@ dist
 "lint": "eslint -c .eslintrc.json --ext .ts src"
 ```
 
+**.eslintrc.json**
+
+#### How to fix eslint for typescript enum "is defined but never used" ?
+
+```
+"no-unused-vars": "off",
+"@typescript-eslint/no-unused-vars": "error"
+```
+
 #### Husky
 
 ```bash
