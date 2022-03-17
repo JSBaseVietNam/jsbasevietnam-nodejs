@@ -8,7 +8,8 @@
     "dev:debug": "ts-node-dev --transpile-only --respawn --inspect=4321 --project tsconfig.dev.json src/main.ts",
     "dev": "ts-node-dev --transpile-only --respawn --project tsconfig.dev.json src/main.ts",
     "build": "tsc -p tsconfig.production.json",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint -c .eslintrc.json --ext .ts src"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,11 @@
     "@tsconfig/node16": "^1.0.2",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.21",
+    "@typescript-eslint/eslint-plugin": "^5.15.0",
+    "@typescript-eslint/parser": "^5.15.0",
+    "eslint": "^8.11.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.5.0",
     "jest": "^27.5.1",
     "ts-node": "^10.7.0",
     "ts-node-dev": "^1.1.8"

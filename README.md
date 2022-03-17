@@ -20,7 +20,7 @@ yarn add --dev @tsconfig/node16 @types/node ts-node
 **main.ts**
 
 ```ts
-console.log("JSBASEVIETNAM");
+console.log('JSBASEVIETNAM');
 ```
 
 - [TSConfig Base](https://www.npmjs.com/package/@tsconfig/node16)
@@ -55,4 +55,44 @@ yarn add -D ts-node-dev
 yarn add jest @types/jest @babel/preset-typescript @babel/preset-env -D
 yarn jest --init
 yarn test
+```
+
+#### ESLint
+
+```bash
+yarn add -D @typescript-eslint/eslint-plugin@latest eslint-config-google@latest eslint @typescript-eslint/parser@latest
+touch .eslintrc.json
+touch .eslintignore
+```
+
+**.eslintrc**
+
+```json
+{
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["google", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {}
+}
+```
+
+**.eslintignore**
+
+```env
+node_modules
+dist
+```
+
+**package.json**
+
+```json
+"lint": "eslint -c .eslintrc.json --ext .ts src"
 ```
