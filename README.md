@@ -48,3 +48,11 @@ yarn add -D ts-node-dev
 "dev:debug": "ts-node-dev --transpile-only --respawn --inspect=4321 --project tsconfig.dev.json src/main.ts",
 "dev": "ts-node-dev --transpile-only --respawn --project tsconfig.dev.json src/main.ts",
 ```
+
+#### Test
+
+```bash
+yarn add jest @types/jest @babel/preset-typescript @babel/preset-env -D
+yarn jest --init
+yarn test
+```
