@@ -1,2 +1,1 @@
-let obj: any;
-console.error('data');
+// let obj: any;
