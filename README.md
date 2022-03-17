@@ -96,3 +96,14 @@ dist
 ```json
 "lint": "eslint -c .eslintrc.json --ext .ts src"
 ```
+
+#### Husky
+
+```bash
+yarn dlx husky-init --yarn2 && yarn
+```
+
+# References
+
+- [ESLint](https://khalilstemmler.com/blogs/typescript/eslint-for-typescript/)
+- [Google Style Guide](https://google.github.io/styleguide/jsguide.html)
