@@ -140,6 +140,13 @@ enum TransportationMode {
 
 ## Less Common Primitives
 
+## Decorator
+
+> Decorator is an expression which returns a function and can take a target, name and property descriptor as arguments
+
 ## References
 
 - https://www.javascripttutorial.net/es-next/
+- https://www.logicbig.com/tutorials/misc/typescript/class-decorators.html
+- https://exploringjs.com/tackling-ts/ch_classes-as-values.html
+- https://exploringjs.com/tackling-ts/toc.html
