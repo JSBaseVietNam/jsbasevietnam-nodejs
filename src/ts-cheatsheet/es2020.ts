@@ -188,6 +188,27 @@ async function mainEs2020() {
   console.log(Example.getCount());
   // Array.at
   console.log([9, 6, 3, 1].at(0));
+  // Map
+  const colors = new Map<number, string>([[1, 'red']]);
+  colors.set(2, 'green');
+  colors.set(3, 'blue');
+  colors.set(4, 'yellow');
+  colors.set(5, 'gray');
+  for (const c of colors) {
+    const [id, name] = c;
+    console.log({ id, name });
+  }
+  const itr = colors.keys();
+  while (true) {
+    const c = itr.next();
+    if (c.done) {
+      break;
+    }
+    console.log(colors.get(c.value));
+  }
+  const colorSet = new Set(['Green', 'Red', 'Orange', 'Yellow', 'Red']);
+  console.log(colorSet.size);
+  colorSet.forEach((c) => console.log(c));
 }
 
 // top level await
