@@ -150,3 +150,4 @@ enum TransportationMode {
 - https://www.logicbig.com/tutorials/misc/typescript/class-decorators.html
 - https://exploringjs.com/tackling-ts/ch_classes-as-values.html
 - https://exploringjs.com/tackling-ts/toc.html
+- https://www.npmjs.com/package/reflect-metadata
