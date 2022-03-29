@@ -85,6 +85,41 @@ function mainDecorator() {
       instance.execute();
     }
   });
+  // Object
+  const object1 = {
+    name: '',
+  } as any;
+  Object.defineProperty(object1, 'hello', {
+    value: () => {
+      console.log('hello object define property');
+    },
+    writable: false,
+    configurable: false,
+    enumerable: true, // defines whether the property is picked by Object.keys(), Object.assign or spread
+  });
+  object1?.hello();
+  console.log(Object.getOwnPropertyDescriptor(object1, 'hello'));
+  console.log(Object.keys(object1));
+  const obj2 = { ...object1 };
+  obj2.name = 'Object 2';
+  obj2?.hello();
+  // redefine hello method object 1
+  const ob1 = { ...object1 };
+  ob1.name = 'a';
+  ob1?.hello();
+  try {
+    Object.defineProperty(object1, 'hello', {
+      value: function () {
+        console.log(`Hello ${this.name}`);
+      },
+    });
+  } catch (error) {
+    console.error(error);
+  }
+  // Object.seal: non-configurable
+  // method seals an object, preventing new properties from being added to it and marking all existing properties as non-configurable
+  // Object.freeze: prevents changing the enumerability, configurability, or writability of existing properties, and prevents the values of existing properties from being changed
+  // Object.preventExtensions: allow changing, not allow add new property
 }
 
 mainDecorator();

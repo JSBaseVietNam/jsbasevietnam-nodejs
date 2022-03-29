@@ -151,3 +151,6 @@ enum TransportationMode {
 - https://exploringjs.com/tackling-ts/ch_classes-as-values.html
 - https://exploringjs.com/tackling-ts/toc.html
 - https://www.npmjs.com/package/reflect-metadata
+- https://www.javascripture.com/PropertyDescriptor
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty?retiredLocale=vi#try_it
+- Immutable vs Immer : https://blog.joshsoftware.com/2021/05/03/native-vs-immutablejs-vs-immer-are-libraries-the-way-to-go-for-immutability-in-react/
