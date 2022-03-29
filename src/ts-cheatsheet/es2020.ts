@@ -136,6 +136,8 @@ async function mainEs2020() {
   // null coalesing assignment
   config.APP_NAME ??= 'APPTITLE';
   console.log(config);
+  const prefix = 'Example';
+
   class Example {
     static #counter: number = 0;
     #id: number; // private field
@@ -171,12 +173,16 @@ async function mainEs2020() {
     static getCount(): number {
       return Example.#counter;
     }
+
+    static [prefix] = 'Typescript Example';
+    [prefix] = 'Example Typescript';
   }
   const ex = new Example('title');
   const ex1 = new Example('title1');
   const ex2 = new Example('title2');
+  console.log('Example[prefix]', Example[prefix]);
   ex.status = 'active';
-  console.log(ex.toJSON(), ex.id, ex.status);
+  console.log(ex.toJSON(), ex.id, ex.status, ex[prefix]);
   console.log(Example.hasStatus(ex));
   console.log(ex.toJSON(), ex1.toJSON(), ex2.toJSON());
   console.log(Example.getCount());
