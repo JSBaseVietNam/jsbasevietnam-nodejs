@@ -122,7 +122,7 @@ const randomTransportationMode = (): TransportationMode => {
   return modes[randomModeIndex];
 };
 
-const main = () => {
+export const main = () => {
   // random data
   const userDataset: Array<{
     userData: UserDTO;
