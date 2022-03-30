@@ -120,6 +120,97 @@ const narrowingMain = () => {
     // (pet as Bird).fly();
     pet.fly();
   }
+  interface Job {
+    type: 'email' | 'sms';
+    payload: any;
+  }
+  class Queue {
+    public run(job: Job) {
+      console.log(job);
+    }
+  }
+  class Notification {
+    protected queue;
+    constructor(queue: any) {
+      this.queue = queue;
+    }
+    protected enqueue(job: Job) {
+      this.queue.run(job);
+      console.log('Enqueue', job.type, job.payload);
+    }
+    isEmail(): this is EmailNoti {
+      return this instanceof EmailNoti;
+    }
+    isSms(): this is SmsNoti {
+      return this instanceof SmsNoti;
+    }
+  }
+
+  class EmailNoti extends Notification {
+    #email: string = '';
+    #content: string = '';
+    constructor(queue: Queue, email: string, content: string) {
+      super(queue);
+      this.#email = email;
+      this.#content = content;
+    }
+    public sendEmail() {
+      console.log(`Send email to ${this.#email}: ${this.#content}`);
+      this.enqueue({
+        type: 'email',
+        payload: {
+          email: this.#email,
+          content: this.#content,
+        },
+      });
+    }
+  }
+
+  class SmsNoti extends Notification {
+    #phoneNumber: string = '';
+    #message: string = '';
+
+    constructor(queue: Queue, phoneNumber: string, message: string) {
+      super(queue);
+      this.#phoneNumber = phoneNumber;
+      this.#message = message;
+    }
+    public sendMessage() {
+      console.log(`Send message to ${this.#phoneNumber}: ${this.#message}`);
+      this.enqueue({
+        type: 'sms',
+        payload: {
+          phoneNumber: this.#phoneNumber,
+          message: this.#message,
+        },
+      });
+    }
+  }
+
+  const notiQueue = new Queue();
+  const notications: Array<Notification> = [];
+  notications.push(
+    new EmailNoti(notiQueue, 'example@sonnm.com', 'welcome email'),
+  );
+  notications.push(
+    new EmailNoti(notiQueue, 'example1@sonnm.com', 'transaction email'),
+  );
+  notications.push(new SmsNoti(notiQueue, '+937590123', 'Secure Code: 779963'));
+  notications.push(
+    new EmailNoti(notiQueue, 'example2@sonnm.com', 'reset password email'),
+  );
+  notications.push(new SmsNoti(notiQueue, '+937590111', 'Secure Code: 779963'));
+  notications.push(
+    new EmailNoti(notiQueue, 'example2@sonnm.com', 'transaction email'),
+  );
+  for (const notification of notications) {
+    if (notification.isEmail()) {
+      notification.sendEmail();
+    } else if (notification.isSms()) {
+      notification.sendMessage();
+    }
+    // and more
+  }
 };
 
 narrowingMain();
