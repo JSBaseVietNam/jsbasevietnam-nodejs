@@ -155,3 +155,4 @@ enum TransportationMode {
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty?retiredLocale=vi#try_it
 - Immutable vs Immer : https://blog.joshsoftware.com/2021/05/03/native-vs-immutablejs-vs-immer-are-libraries-the-way-to-go-for-immutability-in-react/
 - https://basarat.gitbook.io/typescript/main-1/typeinstantiation
+- https://blog.logrocket.com/when-to-use-never-and-unknown-in-typescript-5e4d6c5799ad/

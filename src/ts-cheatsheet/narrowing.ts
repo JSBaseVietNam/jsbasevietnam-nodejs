@@ -211,6 +211,52 @@ const narrowingMain = () => {
     }
     // and more
   }
+
+  // Discriminated unions
+  // Exhaustiveness checking
+  interface Circle {
+    kind: 'circle';
+    radius: number;
+  }
+
+  interface Square {
+    kind: 'square';
+    sideLength: number;
+  }
+
+  interface Rect {
+    kind: 'rect';
+    width: number;
+    height: number;
+  }
+
+  type Shape = Circle | Square | Rect;
+
+  function getArea(shape: Shape) {
+    if (shape.kind === 'circle') {
+      return Math.PI * shape.radius ** 2; // pi*r*r
+    }
+    if (shape.kind === 'square') {
+      return shape.sideLength ** 2; // d*d
+    }
+    if (shape.kind === 'rect') {
+      return shape.width * shape.height;
+    }
+    // ensure all cases are handler
+    const _exhaustiveCheck: never = shape;
+    return _exhaustiveCheck || 0;
+    // switch (shape.kind) {
+    //   case 'circle':
+
+    //   case 'square':
+    //     return shape.sideLength ** 2; // d*d
+    //   default:
+    //     return 0;
+    // }
+  }
+  console.log(getArea({ kind: 'square', sideLength: 5 }));
+  console.log(getArea({ kind: 'circle', radius: 2.5 }));
+  console.log(getArea({ kind: 'rect', height: 5, width: 8 }));
 };
 
 narrowingMain();
