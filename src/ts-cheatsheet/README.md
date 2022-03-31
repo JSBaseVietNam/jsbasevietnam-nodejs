@@ -144,6 +144,62 @@ enum TransportationMode {
 
 > Decorator is an expression which returns a function and can take a target, name and property descriptor as arguments
 
+## Guidelines for Writing Good Generic Functions
+
+> Rule: When possible, use the type parameter itself rather than constraining it
+
+```ts
+function firstElement1<Type>(arr: Type[]) {
+  return arr[0];
+}
+
+function firstElement2<Type extends any[]>(arr: Type) {
+  return arr[0];
+}
+
+// a: number (good)
+const a = firstElement1([1, 2, 3]);
+// b: any (bad)
+const b = firstElement2([1, 2, 3]);
+```
+
+> Rule: Always use as few type parameters as possible
+
+```ts
+// good : only depend on one field type
+function filter1<Type>(arr: Type[], func: (arg: Type) => boolean): Type[] {
+  return arr.filter(func);
+}
+
+// bad: its create two few types
+function filter2<Type, Func extends (arg: Type) => boolean>(
+  arr: Type[],
+  func: Func,
+): Type[] {
+  return arr.filter(func);
+}
+```
+
+> Rule: If a type parameter only appears in one location, strongly reconsider if you actually need it
+
+```ts
+// good
+function greet(s: string) {
+  console.log('Hello, ' + s);
+}
+
+// not necessary
+function greet<Str extends string>(s: Str) {
+  console.log('Hello, ' + s);
+}
+
+greet('world');
+```
+
+## Function Overload
+
+> The signature of the implementation is not visible from the outside. When writing an overloaded function, you should always have two or more signatures above the implementation of the function
+
 ## References
 
 - https://www.javascripttutorial.net/es-next/
