@@ -123,6 +123,10 @@ chmod ug+x .husky/*
 
 - [ES2020](https://www.freecodecamp.org/news/javascript-new-features-es2020/)
 
+## FAQ
+
+- [Typescript](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-are-functions-returning-non-void-assignable-to-function-returning-void)
+
 # References
 
 - [ESLint](https://khalilstemmler.com/blogs/typescript/eslint-for-typescript/)

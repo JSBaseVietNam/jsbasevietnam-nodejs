@@ -161,6 +161,27 @@ const functionsMain = () => {
   console.table(findSongs(songs, 500_000));
   console.table(findSongs(songs, 500_000, 300_000));
   console.table(findSongs(songs, Singer.HuongLy, 500_00, 300_00));
+
+  type VoidFunc = () => void;
+  const vf1 : VoidFunc = () => {
+    return true;
+  }
+  const v1 = vf1();
+  console.log(typeof v1);
+
+  const src = [1, 2, 3];
+  const dst = [0];
+  src.forEach((el) => dst.push(el));
+  const values = {}; // object => dto
+
+  console.log(typeof vf1, typeof values);
+
+  // function f1(a: any) {
+  //   a.b(); // OK
+  // }
+  // function f2(a: unknown) {
+  //   a.b();
+  // } // NOT OK
 };
 
 functionsMain();
