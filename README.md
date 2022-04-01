@@ -114,6 +114,9 @@ dist
 npx husky-init && yarn              # Yarn 1
 # add hooks
 npx husky add .husky/pre-commit "yarn lint"
+# add execute permissions
+ls -alh ./husky
+chmod ug+x .husky/*
 ```
 
 ## ECMAScript
