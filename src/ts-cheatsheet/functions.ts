@@ -109,17 +109,58 @@ const functionsMain = () => {
   toFixed(5);
   toFixed();
   // Funtion Overload
-  enum singer {
+  enum Singer {
     HuongLy = 'Huong Ly',
     ThaoPham = 'Thao Pham',
     KieuTho = 'Kieu Tho',
   }
-  const songs = [
-    { id: 1, name: 'Là ai từ bỏ, là ai vô tình', single: singer.HuongLy },
-    { id: 1, name: 'Yêu là cưới', single: singer.ThaoPham },
-    { id: 1, name: 'Là ai từ bỏ, là ai vô tình', single: singer.KieuTho },
+  interface Song {
+    id:number,
+    name: string,
+    singer: Singer,
+    views: number,
+    likes: number,
+  }
+  const songs : Song[] = [
+    { id: 1, name: 'Là ai từ bỏ, là ai vô tình', singer: Singer.HuongLy, views:1_000_000,likes:500_000 },
+    { id: 2, name: 'Muốn em là', singer: Singer.ThaoPham, views: 500_000, likes:250_000},
+    { id: 3, name: 'Yêu là cưới, là ai vô tình', singer: Singer.KieuTho,views: 300_000, likes:290_000},
   ];
+  function isMatched(song: Song, args:Array<number|string|Singer>){
+    if(args.length === 0){
+      return true;
+    }
+    // singer name is a string
+    if(args.length === 1 && typeof args[0] === 'string' ){
+      return song.singer === args[0];
+    }
+    // filter by views
+    if(args.length === 1 && typeof args[0] === 'number'){
+      return song.views >= args[0];
+    }
+    // filter by views and likes
+    if(args.length === 2){
+      return song.views >= args[0] && song.likes >= args[1];
+    }
+    // filter by singer, views and likes
+    if(args.length === 3){
+      return song.singer === args[0] && song.views >= args[1] && song.likes >= args[2];
+    }
+    return true;
+  }
+  function findSongs(songs: Song[], singer: Singer, views: number, likes: number): Song[];
+  function findSongs(songs: Song[], views: number, likes: number): Song[];
+  function findSongs(songs: Song[], views: number): Song[];
+  function findSongs(songs: Song[], singer: Singer): Song[];
+  function findSongs(songs: Song[], ...args: any): Song[]{
+    return songs.filter(s => isMatched(s, args));
+  }
+
   console.log(songs);
+  console.table(findSongs(songs, Singer.ThaoPham));
+  console.table(findSongs(songs, 500_000));
+  console.table(findSongs(songs, 500_000, 300_000));
+  console.table(findSongs(songs, Singer.HuongLy, 500_00, 300_00));
 };
 
 functionsMain();
