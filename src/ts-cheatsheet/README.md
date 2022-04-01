@@ -324,6 +324,124 @@ function fn(x: string | number) {
 }
 ```
 
+**Function**
+
+```ts
+  function doSomethingGreat(f: Function){
+    return f()
+  }
+```
+
+**bind**
+
+```ts
+  class ExampleA {
+    #name: string;
+
+    constructor(name: string){
+      this.#name = name;
+      this.onClick = this.onClick.bind(this);
+    }
+    onClick(){
+      console.log(this);
+      console.log(this.#name);
+    }
+    triggerOnClick(f: Function){
+      f();
+    }
+  }
+
+  const exampleA = new ExampleA("Bind Example");
+  exampleA.triggerOnClick(exampleA.onClick);
+
+  // call
+  class ExampleA {
+    #name: string;
+
+    constructor(name: string){
+      this.#name = name;
+      this.onClick = this.onClick.bind(this);
+    }
+    onClick(){
+      console.log(this);
+      console.log(this.#name);
+    }
+    onCall(){
+      console.log(this.#name);
+    }
+    triggerOnClick(f: Function){
+      f();
+    }
+  }
+
+  const exampleA = new ExampleA("Bind Example");
+  exampleA.triggerOnClick(exampleA.onClick);
+  const exampleB = new ExampleA('Call example');
+  exampleA.onCall.call(exampleB);
+
+  // apply
+  class ExampleA {
+    #name: string;
+
+    constructor(name: string){
+      this.#name = name;
+      this.onClick = this.onClick.bind(this);
+    }
+    onClick(){
+      console.log(this);
+      console.log(this.#name);
+    }
+    onCall(hello: string = '', exclaimation = ''){
+      console.log(`${hello} ${this.#name} ${exclaimation}`);
+    }
+    triggerOnClick(f: Function){
+      f();
+    }
+  }
+
+  const exampleA = new ExampleA("Bind Example");
+  exampleA.triggerOnClick(exampleA.onClick);
+  const exampleB = new ExampleA('Call example');
+  exampleA.onCall.call(exampleB);
+  exampleA.onCall.apply(exampleB, ["Hi", '!'])  
+```
+
+### In JavaScript all functions are object methods.
+
+> If a function is not a method of a JavaScript object, it is a function of the global object
+
+> call: It can be used to invoke (call) a method with an owner object as an argument (parameter).
+
+> With the apply() method, you can write a method that can be used on different objects.
+
+> The call() method takes arguments separately.
+
+> The apply() method takes arguments as an array.
+
+### Rest arguments
+
+```ts
+function multiply(n: number, ...m: number[]) {
+  return m.map((x) => n * x);
+}
+// 'a' gets value [10, 20, 30, 40]
+const a = multiply(10, 1, 2, 3, 4);
+
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+arr1.push(...arr2);
+
+// Inferred type is number[] -- "an array with zero or more numbers",
+// not specifically two numbers
+const args = [8, 5];
+const angle = Math.atan2(...args);
+
+// Parameter Destructuring
+function sum({ a, b, c }: { a: number; b: number; c: number }) {
+  console.log(a + b + c);
+}
+```
+
 ## References
 
 - https://www.javascripttutorial.net/es-next/

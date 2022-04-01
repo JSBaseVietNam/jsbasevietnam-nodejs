@@ -182,6 +182,54 @@ const functionsMain = () => {
   // function f2(a: unknown) {
   //   a.b();
   // } // NOT OK
+
+  // function doSomethingGreat(f: Function){
+  //   return f()
+  // }
+  // bind
+  class ExampleA {
+    #name: string;
+
+    constructor(name: string){
+      this.#name = name;
+      this.onClick = this.onClick.bind(this);
+    }
+    onClick(){
+      console.log(this);
+      console.log(this.#name);
+    }
+    onCall(hello: string = '', exclaimation = ''){
+      console.log(`${hello} ${this.#name} ${exclaimation}`);
+    }
+    triggerOnClick(f: Function){
+      f();
+    }
+  }
+
+  const exampleA = new ExampleA("Bind Example");
+  exampleA.triggerOnClick(exampleA.onClick);
+  const exampleB = new ExampleA('Call example');
+  exampleA.onCall.call(exampleB);
+  exampleA.onCall.apply(exampleB, ["Hi", '!'])
+
+  // Inferred as 2-length tuple
+  const args = [8, 5] as const;
+  // OK
+  const angle = Math.atan2(...args);
+  console.log(angle);
+
+  // Parameter Destructuring
+  // function sum({ a, b, c }: { a: number; b: number; c: number }) {
+  //   console.log(a + b + c);
+  // }
 };
 
 functionsMain();
+
+// for (const key in globalThis) {
+//   if (Object.prototype.hasOwnProperty.call(globalThis, key)) {
+//     if( typeof (globalThis as any)[key] === 'function'){
+//       console.log(key);
+//     }
+//   }
+// }

@@ -10,16 +10,16 @@ async function mainEs2020() {
   const sum = 3n + 2n;
   console.log(sum);
   console.log(3n + BigInt(2)); // 5n
-  console.log(3n == 3); // true
-  console.log(3n == '3'); // true
-  console.log(BigInt(3) == Number(3)); // true
-  console.log(0n == false); // true
-  console.log(3n > '2'); // true
-  console.log(BigInt(3) <= 2); // false
-  console.log(3n === 3); // false
-  console.log(3n === '3'); // false
-  console.log(BigInt(3) === Number(3)); // false
-  console.log(0n === false); // false
+  // console.log(3n == 3); // true
+  // console.log(3n == '3'); // true
+  // console.log(BigInt(3) == Number(3)); // true
+  // console.log(0n == false); // true
+  // console.log(3n > '2'); // true
+  // console.log(BigInt(3) <= 2); // false
+  // console.log(3n === 3); // false
+  // console.log(3n === '3'); // false
+  // console.log(BigInt(3) === Number(3)); // false
+  // console.log(0n === false); // false
 
   // dynamic import
   const randomNumber = Math.floor(Math.random() * 10);
