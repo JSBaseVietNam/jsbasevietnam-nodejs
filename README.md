@@ -108,6 +108,8 @@ dist
 
 #### Husky
 
+> Should run this setup at least 1
+
 ```bash
 npx husky-init && yarn              # Yarn 1
 # add hooks
