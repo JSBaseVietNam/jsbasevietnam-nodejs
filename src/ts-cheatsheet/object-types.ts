@@ -207,7 +207,7 @@ function objectTypesMain() {
   const [action, index] = p;
   console.log(action, index);
   // readonly
-  let point = [3, 4] as const;
+  const point = [3, 4] as const;
   console.log(point);
 }
 
