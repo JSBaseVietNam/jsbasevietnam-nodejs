@@ -195,6 +195,20 @@ function objectTypesMain() {
       continue;
     }
   }
+  // Array Types
+  const colors: ReadonlyArray<string> = ['red', 'green', 'blue'];
+  for (const c of colors) {
+    console.log(c);
+  }
+  // Tuples
+  type Pair = [string, number];
+  const p: Pair = ['action', 1];
+  console.log(p);
+  const [action, index] = p;
+  console.log(action, index);
+  // readonly
+  let point = [3, 4] as const;
+  console.log(point);
 }
 
 objectTypesMain();

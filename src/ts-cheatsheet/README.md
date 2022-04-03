@@ -200,61 +200,85 @@ greet('world');
 
 > The signature of the implementation is not visible from the outside. When writing an overloaded function, you should always have two or more signatures above the implementation of the function
 
-
 ```ts
-  // Funtion Overload
-  enum Singer {
-    HuongLy = 'Huong Ly',
-    ThaoPham = 'Thao Pham',
-    KieuTho = 'Kieu Tho',
-  }
-  interface Song {
-    id:number,
-    name: string,
-    singer: Singer,
-    views: number,
-    likes: number,
-  }
-  const songs : Song[] = [
-    { id: 1, name: 'Là ai từ bỏ, là ai vô tình', singer: Singer.HuongLy, views:1_000_000,likes:500_000 },
-    { id: 2, name: 'Muốn em là', singer: Singer.ThaoPham, views: 500_000, likes:250_000},
-    { id: 3, name: 'Yêu là cưới, là ai vô tình', singer: Singer.KieuTho,views: 300_000, likes:290_000},
-  ];
-  function isMatched(song: Song, args:Array<number|string|Singer>){
-    if(args.length === 0){
-      return true;
-    }
-    // singer name is a string
-    if(args.length === 1 && typeof args[0] === 'string' ){
-      return song.singer === args[0];
-    }
-    // filter by views
-    if(args.length === 1 && typeof args[0] === 'number'){
-      return song.views >= args[0];
-    }
-    // filter by views and likes
-    if(args.length === 2){
-      return song.views >= args[0] && song.likes >= args[1];
-    }
-    // filter by singer, views and likes
-    if(args.length === 3){
-      return song.singer === args[0] && song.views >= args[1] && song.likes >= args[2];
-    }
+// Funtion Overload
+enum Singer {
+  HuongLy = 'Huong Ly',
+  ThaoPham = 'Thao Pham',
+  KieuTho = 'Kieu Tho',
+}
+interface Song {
+  id: number;
+  name: string;
+  singer: Singer;
+  views: number;
+  likes: number;
+}
+const songs: Song[] = [
+  {
+    id: 1,
+    name: 'Là ai từ bỏ, là ai vô tình',
+    singer: Singer.HuongLy,
+    views: 1_000_000,
+    likes: 500_000,
+  },
+  {
+    id: 2,
+    name: 'Muốn em là',
+    singer: Singer.ThaoPham,
+    views: 500_000,
+    likes: 250_000,
+  },
+  {
+    id: 3,
+    name: 'Yêu là cưới, là ai vô tình',
+    singer: Singer.KieuTho,
+    views: 300_000,
+    likes: 290_000,
+  },
+];
+function isMatched(song: Song, args: Array<number | string | Singer>) {
+  if (args.length === 0) {
     return true;
   }
-  function findSongs(songs: Song[], singer: Singer, views: number, likes: number): Song[];
-  function findSongs(songs: Song[], views: number, likes: number): Song[];
-  function findSongs(songs: Song[], views: number): Song[];
-  function findSongs(songs: Song[], singer: Singer): Song[];
-  function findSongs(songs: Song[], ...args: any): Song[]{
-    return songs.filter(s => isMatched(s, args));
+  // singer name is a string
+  if (args.length === 1 && typeof args[0] === 'string') {
+    return song.singer === args[0];
   }
+  // filter by views
+  if (args.length === 1 && typeof args[0] === 'number') {
+    return song.views >= args[0];
+  }
+  // filter by views and likes
+  if (args.length === 2) {
+    return song.views >= args[0] && song.likes >= args[1];
+  }
+  // filter by singer, views and likes
+  if (args.length === 3) {
+    return (
+      song.singer === args[0] && song.views >= args[1] && song.likes >= args[2]
+    );
+  }
+  return true;
+}
+function findSongs(
+  songs: Song[],
+  singer: Singer,
+  views: number,
+  likes: number,
+): Song[];
+function findSongs(songs: Song[], views: number, likes: number): Song[];
+function findSongs(songs: Song[], views: number): Song[];
+function findSongs(songs: Song[], singer: Singer): Song[];
+function findSongs(songs: Song[], ...args: any): Song[] {
+  return songs.filter((s) => isMatched(s, args));
+}
 
-  console.log(songs);
-  console.table(findSongs(songs, Singer.ThaoPham));
-  console.table(findSongs(songs, 500_000));
-  console.table(findSongs(songs, 500_000, 300_000));
-  console.table(findSongs(songs, Singer.HuongLy, 500_00, 300_00));
+console.log(songs);
+console.table(findSongs(songs, Singer.ThaoPham));
+console.table(findSongs(songs, 500_000));
+console.table(findSongs(songs, 500_000, 300_000));
+console.table(findSongs(songs, Singer.HuongLy, 500_00, 300_00));
 ```
 
 ### Special types
@@ -266,16 +290,15 @@ greet('world');
 > is a contextual function type with a void return type (type vf = () => void), when implemented, can return any other value, but it will be ignored.
 
 ```ts
-  type VoidFunc = () => void;
-  const vf1 : VoidFunc = () => {
-    
-    return true;
-  }
-  const v1 = vf1(); // 
-  // to allow this work
-  const src = [1, 2, 3];
-  const dst = [0];
-  src.forEach((el) => dst.push(el));  
+type VoidFunc = () => void;
+const vf1: VoidFunc = () => {
+  return true;
+};
+const v1 = vf1(); //
+// to allow this work
+const src = [1, 2, 3];
+const dst = [0];
+src.forEach((el) => dst.push(el));
 ```
 
 **object**
@@ -283,8 +306,8 @@ greet('world');
 > The special type object refers to any value that isn’t a primitive (string, number, bigint, boolean, symbol, null, or undefined). This is different from the empty object type { }, and also different from the global type Object
 
 ```ts
-  const values = {}; // object => dto
-  console.log(typeof values); // object
+const values = {}; // object => dto
+console.log(typeof values); // object
 ```
 
 **unknown**
@@ -292,19 +315,19 @@ greet('world');
 > The unknown type represents any value. This is similar to the any type, but is safer because it’s not legal to do anything with an unknown value
 
 ```ts
-  function f1(a: any) {
-    a.b(); // OK
-  }
-  function f2(a: unknown) {
-    a.b();
-  } // NOT OK
+function f1(a: any) {
+  a.b(); // OK
+}
+function f2(a: unknown) {
+  a.b();
+} // NOT OK
 
-  function safeParse(s: string): unknown {
-    return JSON.parse(s);
-  }
+function safeParse(s: string): unknown {
+  return JSON.parse(s);
+}
 
-  // Need to be careful with 'obj'!
-  const obj = safeParse(someRandomString);  
+// Need to be careful with 'obj'!
+const obj = safeParse(someRandomString);
 ```
 
 **never**
@@ -314,9 +337,9 @@ function fail(msg: string): never {
   throw new Error(msg);
 }
 function fn(x: string | number) {
-  if (typeof x === "string") {
+  if (typeof x === 'string') {
     // do something
-  } else if (typeof x === "number") {
+  } else if (typeof x === 'number') {
     // do something else
   } else {
     x; // has type 'never'!
@@ -327,83 +350,83 @@ function fn(x: string | number) {
 **Function**
 
 ```ts
-  function doSomethingGreat(f: Function){
-    return f()
-  }
+function doSomethingGreat(f: Function) {
+  return f();
+}
 ```
 
 **bind**
 
 ```ts
-  class ExampleA {
-    #name: string;
+class ExampleA {
+  #name: string;
 
-    constructor(name: string){
-      this.#name = name;
-      this.onClick = this.onClick.bind(this);
-    }
-    onClick(){
-      console.log(this);
-      console.log(this.#name);
-    }
-    triggerOnClick(f: Function){
-      f();
-    }
+  constructor(name: string) {
+    this.#name = name;
+    this.onClick = this.onClick.bind(this);
   }
-
-  const exampleA = new ExampleA("Bind Example");
-  exampleA.triggerOnClick(exampleA.onClick);
-
-  // call
-  class ExampleA {
-    #name: string;
-
-    constructor(name: string){
-      this.#name = name;
-      this.onClick = this.onClick.bind(this);
-    }
-    onClick(){
-      console.log(this);
-      console.log(this.#name);
-    }
-    onCall(){
-      console.log(this.#name);
-    }
-    triggerOnClick(f: Function){
-      f();
-    }
+  onClick() {
+    console.log(this);
+    console.log(this.#name);
   }
-
-  const exampleA = new ExampleA("Bind Example");
-  exampleA.triggerOnClick(exampleA.onClick);
-  const exampleB = new ExampleA('Call example');
-  exampleA.onCall.call(exampleB);
-
-  // apply
-  class ExampleA {
-    #name: string;
-
-    constructor(name: string){
-      this.#name = name;
-      this.onClick = this.onClick.bind(this);
-    }
-    onClick(){
-      console.log(this);
-      console.log(this.#name);
-    }
-    onCall(hello: string = '', exclaimation = ''){
-      console.log(`${hello} ${this.#name} ${exclaimation}`);
-    }
-    triggerOnClick(f: Function){
-      f();
-    }
+  triggerOnClick(f: Function) {
+    f();
   }
+}
 
-  const exampleA = new ExampleA("Bind Example");
-  exampleA.triggerOnClick(exampleA.onClick);
-  const exampleB = new ExampleA('Call example');
-  exampleA.onCall.call(exampleB);
-  exampleA.onCall.apply(exampleB, ["Hi", '!'])  
+const exampleA = new ExampleA('Bind Example');
+exampleA.triggerOnClick(exampleA.onClick);
+
+// call
+class ExampleA {
+  #name: string;
+
+  constructor(name: string) {
+    this.#name = name;
+    this.onClick = this.onClick.bind(this);
+  }
+  onClick() {
+    console.log(this);
+    console.log(this.#name);
+  }
+  onCall() {
+    console.log(this.#name);
+  }
+  triggerOnClick(f: Function) {
+    f();
+  }
+}
+
+const exampleA = new ExampleA('Bind Example');
+exampleA.triggerOnClick(exampleA.onClick);
+const exampleB = new ExampleA('Call example');
+exampleA.onCall.call(exampleB);
+
+// apply
+class ExampleA {
+  #name: string;
+
+  constructor(name: string) {
+    this.#name = name;
+    this.onClick = this.onClick.bind(this);
+  }
+  onClick() {
+    console.log(this);
+    console.log(this.#name);
+  }
+  onCall(hello: string = '', exclaimation = '') {
+    console.log(`${hello} ${this.#name} ${exclaimation}`);
+  }
+  triggerOnClick(f: Function) {
+    f();
+  }
+}
+
+const exampleA = new ExampleA('Bind Example');
+exampleA.triggerOnClick(exampleA.onClick);
+const exampleB = new ExampleA('Call example');
+exampleA.onCall.call(exampleB);
+exampleA.onCall.apply(exampleB, ['Hi', '!']);
 ```
 
 ### In JavaScript all functions are object methods.
@@ -440,6 +463,83 @@ const angle = Math.atan2(...args);
 function sum({ a, b, c }: { a: number; b: number; c: number }) {
   console.log(a + b + c);
 }
+```
+
+### Generic Types
+
+```ts
+class Archer {
+  fire() {
+    console.log('fire');
+  }
+}
+class Guardian {
+  defend() {
+    console.log('defend');
+  }
+}
+class Knight {
+  attack() {
+    console.log('attack');
+  }
+}
+// Generic object types
+interface Hero<T> {
+  character: T;
+  health: number;
+  stamina: number;
+}
+
+const heros: Hero<Archer | Guardian | Knight>[] = [];
+const heroA: Hero<Archer> = {
+  character: new Archer(),
+  health: 100,
+  stamina: 100,
+};
+const heroB: Hero<Guardian> = {
+  character: new Guardian(),
+  health: 100,
+  stamina: 100,
+};
+const heroC: Hero<Knight> = {
+  character: new Knight(),
+  health: 100,
+  stamina: 100,
+};
+heros.push(heroA, heroB, heroC);
+for (const hero of heros) {
+  console.log(hero);
+  if (hero.character instanceof Archer) {
+    hero.character.fire();
+    continue;
+  }
+  if (hero.character instanceof Guardian) {
+    hero.character.defend();
+    continue;
+  }
+  if (hero.character instanceof Knight) {
+    hero.character.attack();
+    continue;
+  }
+}
+```
+
+### Array & Tuples
+
+```ts
+const colors: ReadonlyArray<string> = ['red', 'green', 'blue'];
+for (const c of colors) {
+  console.log(c);
+}
+// Tuples
+type Pair = [string, number];
+const p: Pair = ['action', 1];
+console.log(p);
+const [action, index] = p;
+console.log(action, index);
+// readonly
+let point = [3, 4] as const;
+console.log(point);
 ```
 
 ## References
