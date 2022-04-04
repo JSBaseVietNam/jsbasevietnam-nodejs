@@ -542,6 +542,70 @@ let point = [3, 4] as const;
 console.log(point);
 ```
 
+### Manipulate Types
+
+```ts
+// generic
+function identity<T>(arg: T): T {
+  return arg;
+}
+const id = identity<string>('abc');
+console.log(id);
+// generic constraints
+function getProperty<Type, Key extends keyof Type>(obj: Type, key: Key) {
+  return obj[key];
+}
+const obj = { a: 1, b: 2, c: 3 };
+console.log(getProperty(obj, 'a'));
+
+// key of operator
+type Point = { x: number; y: number };
+type P = keyof Point;
+const x: P = 'x';
+const y: P = 'y';
+const p: Point = { x: 1, y: 2 };
+console.log(p[x], p[y]);
+// keyof same as "key1" | "key2"
+If the type has a string or number index signature, keyof will return those types instead:
+  type Arrayish = { [n: number]: unknown };
+  type A = keyof Arrayish; // type A = number
+  type Mapish = { [k: string]: boolean };
+  type M = keyof Mapish;
+  type M = string | number
+
+  // key of operator
+  type Point = { x: number; y: number };
+  type P = keyof Point;
+  const x: P = 'x';
+  const y: P = 'y';
+  const p: Point = { x: 1, y: 2 };
+  console.log(p[x], p[y]);
+  // keyof same as "key1" | "key2"
+  function fnc() {
+    return { x: 10, y: 3 };
+  }
+  // typeof type
+  type P1 = ReturnType<typeof fnc>;
+  const p1: P1 = { x: 1, y: 2 };
+  console.log(p1);
+  function isOk() {
+    return true;
+  }
+  const isContinue: ReturnType<typeof isOk> = false;
+  console.log(isContinue);
+  // Conditional types
+  interface Animal {
+    live(): void;
+  }
+  interface Dog extends Animal {
+    woof(): void;
+  }
+
+  type Example1 = Dog extends Animal ? number : string;
+```
+
+> SomeType extends OtherType ? TrueType : FalseType;
+
 ## References
 
 - https://www.javascripttutorial.net/es-next/
