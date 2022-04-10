@@ -429,6 +429,34 @@ exampleA.onCall.call(exampleB);
 exampleA.onCall.apply(exampleB, ['Hi', '!']);
 ```
 
+**Generator**
+
+```ts
+const randomNumber = (n: number = 100): number => {
+  return Math.floor(Math.random() * n);
+};
+const randomLetter = (): string => {
+  const possible =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const randomIndex = randomNumber(possible.length);
+  return possible[randomIndex];
+};
+// Generator
+function* randomData(n: number): Generator {
+  for (let i = 0; i < n; i++) {
+    if (i % 3 === 0) {
+      yield randomNumber();
+    } else {
+      yield randomLetter();
+    }
+  }
+}
+const iterator = randomData(10);
+console.log(iterator.next().value);
+console.log(iterator.next().value);
+console.log(iterator.next().value);
+```
+
 ### In JavaScript all functions are object methods.
 
 > If a function is not a method of a JavaScript object, it is a function of the global object
